@@ -7,6 +7,7 @@ class Model_user extends CI_Model
         $query = "SELECT `user`.*,`role_id`.`role`
         FROM `user` JOIN `role_id`
         ON `user`.`role_id` = `role_id`.`id`
+        ORDER BY user.`date` DESC
         ";
 
         return $this->db->query($query);
@@ -31,15 +32,5 @@ class Model_user extends CI_Model
     function getRole()
     {
         return $this->db->get('role_id');
-    }
-
-    function getProduk()
-    {
-        $query = "SELECT produk.`nama_produk`,SUM(pipeline.`estimasi_close`) AS tot_estimasi,SUM(pipeline.`closing`)AS tot_closing
-        FROM pipeline
-        INNER JOIN produk ON pipeline.`id_produk`=produk.`id_produk`
-        GROUP BY produk.`nama_produk`";
-
-        return $this->db->query($query);
     }
 }

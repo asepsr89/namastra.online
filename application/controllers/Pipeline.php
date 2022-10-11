@@ -16,7 +16,6 @@ class Pipeline extends CI_Controller
         parent::__construct();
         $this->load->model('Model_pipeline');
         $this->load->model('Model_divisi');
-        $this->load->model('Model_divisi');
     }
 
     public function index()
@@ -49,7 +48,7 @@ class Pipeline extends CI_Controller
         $data['halaman'] = 'Input Pipeline';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['cabang'] = $this->db->get('cabang')->result();
-        $data['produk'] = $this->db->get('produk')->result();
+        $data['data'] = $this->Model_divisi->get_divisi();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
@@ -63,7 +62,6 @@ class Pipeline extends CI_Controller
         $data['halaman'] = 'Edit Pipeline';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pipeline'] = $this->Model_pipeline->getByPipeline($id_pipline)->row_array();
-        $data['produk'] = $this->db->get('produk')->result();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
@@ -73,7 +71,6 @@ class Pipeline extends CI_Controller
 
     public function simpanpipeline()
     {
-
         $data['halaman'] = 'Input Pipeline';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['cabang'] = $this->db->get('cabang')->result();
@@ -95,9 +92,6 @@ class Pipeline extends CI_Controller
         ]);
         $this->form_validation->set_rules('prospek', 'Prospek', 'required|trim', [
             'required' => 'Prospek tidak boleh kosong'
-        ]);
-        $this->form_validation->set_rules('produk', 'Produk', 'required|trim', [
-            'required' => 'Produk tidak boleh kosong'
         ]);
 
         if ($this->form_validation->run() == false) {
@@ -148,7 +142,6 @@ class Pipeline extends CI_Controller
                     'id_produk' => $produk,
                     'upload_img' => $gambar
                 );
-
                 $this->Model_pipeline->simpanpipeline($data);
                 $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert">
            Data Telah Tersimpan...!!
@@ -182,8 +175,23 @@ class Pipeline extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['cabang'] = $this->db->get('cabang')->result();
 
-        $this->form_validation->set_rules('produk', 'Produk', 'required|trim', [
-            'required' => 'Produk tidak boleh kosong'
+        $this->form_validation->set_rules('tgl_prospek', 'Tgl_prospek', 'required|trim', [
+            'required' => 'Tanggal Prospek tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('tlfunding', 'Tlfunding', 'required|trim', [
+            'required' => 'Nama TL Funding tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('namaprospek', 'Namaprospek', 'required|trim', [
+            'required' => 'Nama Prospek tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim', [
+            'required' => 'Alamat tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('nohp', 'Nohp', 'required|trim', [
+            'required' => 'No Hp tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('prospek', 'Prospek', 'required|trim', [
+            'required' => 'Prospek tidak boleh kosong'
         ]);
 
         if ($this->form_validation->run() == false) {
@@ -204,7 +212,6 @@ class Pipeline extends CI_Controller
             $estimasiclosing = $this->input->post('estimasiclosing');
             $closing = $this->input->post('closing');
             $prospek = $this->input->post('prospek');
-            $produk = $this->input->post('produk');
             $data = array(
                 'id_pipline' => $id_pipline,
                 'tgl_input' => date('Y-m-d'),
@@ -217,11 +224,8 @@ class Pipeline extends CI_Controller
                 'nohp' => $nohp,
                 'estimasi_close' => $estimasiclosing,
                 'closing' => $closing,
-                'pipline' => $prospek,
-                'id_produk' => $produk
+                'pipline' => $prospek
             );
-            var_dump($data);
-            die;
             $simpan = $this->Model_pipeline->updatetpipline($data, $id_pipline);
             if ($simpan) {
                 $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert">

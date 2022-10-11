@@ -14,16 +14,16 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row mb-6">
+            <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h5> <b> Rp. <?php echo number_format($jmlDeposito['tot_depo'], '0', '', '.'); ?></b></h5>
+                            <h3> <b> Rp. <?php echo number_format($jmlDeposito['tot_depo'], '0', '', '.'); ?></b></h3>
                             <p>Total Deposito</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-cash"></i>
+                            <i class="fa fa-usd"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -33,11 +33,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h5> <b> Rp. <?php echo number_format($jmlPinjaman['tot_pinjaman'], '0', '', '.'); ?></b></h5>
+                            <h3> <b> Rp. <?php echo number_format($jmlPinjaman['tot_pinjaman'], '0', '', '.'); ?></b></h3>
+
                             <p>Total Pinjaman</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-card"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -47,11 +45,11 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h5> <b> Rp. <?php echo number_format($totalclosing['tot_closing'], '0', '', '.'); ?></b></h5>
+                            <h3> <b> Rp. <?php echo number_format($totalclosing['tot_closing'], '0', '', '.'); ?></b></h3>
                             <p>Total Closing</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="ion ion-person-add"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -61,7 +59,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h5> <b> Rp. <?php echo number_format($totalestimasi['tot_estimasi'], '0', '', '.'); ?></b></h5>
+                            <h3> <b> Rp. <?php echo number_format($totalestimasi['tot_estimasi'], '0', '', '.'); ?></b></h3>
                             <p>Total Estimasi Closing</p>
                         </div>
                         <div class="icon">
@@ -73,78 +71,6 @@
                 <div class="row">
                 </div>
             </div>
-    </section>
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col mb-3">
-                    <div class="card-group">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Table Pipeline</h3>
-                                <div class="card-tools">
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped wt">
-                                        <thead>
-                                            <tr class="bg-primary">
-                                                <th scope="col">no</th>
-                                                <th scope="50%">Nama Produk</th>
-                                                <th scope="col">Estimasi Closing</th>
-                                                <th scope="col">Closing Produk</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $no = 1;
-                                            foreach ($produk as $pr) {
-                                                $sub_estimasi[] = $pr->tot_estimasi;
-                                                $total_estimasi = array_sum($sub_estimasi);
-                                                $sub_closing[] = $pr->tot_closing;
-                                                $total_closing = array_sum($sub_closing);
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $no; ?></td>
-                                                    <td><?php echo $pr->nama_produk ?></td>
-                                                    <td><?php echo number_format($pr->tot_estimasi, '0', '', '.');  ?></td>
-                                                    <td><?php echo number_format($pr->tot_closing, '0', '', '.');  ?></td>
-                                                </tr>
-                                            <?php
-                                                $no++;
-                                            } ?>
-                                            <tr class="bg-warning">
-                                                <td></td>
-                                                <td style="font-size: 18px;"><b>Total</b></td>
-                                                <td style="font-size: 18px;"><b><?php echo number_format($total_estimasi, '0', ' ', '.');  ?></b></td>
-                                                <td style="font-size: 18px;"><b><?php echo number_format($total_closing, '0', '', '.');  ?></b></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="col-4 mb-3">
-                    <div class="card-group">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Chart Deposito</h3>
-                                <div class="card-tools">
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-        </div>
     </section>
     <section class="content">
         <div class="container-fluid">
@@ -192,8 +118,8 @@
                 </div>
             </div>
         </div>
-    </section>
 </div>
+</section>
 
 
 <script>
@@ -215,7 +141,6 @@
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
                     data: <?php echo json_encode($tot_nominal) ?>
-
                 },
                 {
                     label: '',
@@ -256,7 +181,7 @@
                             return 'Rp.' + value;
                         }
                     }
-                }],
+                }]
             },
 
         }
@@ -278,12 +203,11 @@
                     pointStrokeColor: 'rgba(60,141,188,1)',
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-
                     data: <?php echo json_encode($tot_pinjaman) ?>
                 },
                 {
                     label: '',
-                }
+                },
             ]
         }
 

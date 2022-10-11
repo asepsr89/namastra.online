@@ -20,8 +20,7 @@
                             <h3 class="card-title">Input Pipeline</h3>
                         </div>
                         <div class="card-body">
-                            <?php echo form_open_multipart('pipeline/simpanpipeline', '', 'formpipeline'); ?>
-                            <div class="pesan" style="display: none;"></div>
+                            <?php echo form_open_multipart('pipeline/simpanpipeline'); ?>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="text" class="form-control" value="<?php echo  $user['email']; ?>" readonly name="email" id="email">
@@ -40,16 +39,22 @@
                                 </div>
                                 <?= form_error('tgl_prospek', '<small class="text-danger" pl-3>', '</small>'); ?>
                             </div>
+
                             <div class="form-group">
-                                <label for="Produk">produk</label>
-                                <select name="produk" id="produk" class="form-control">
-                                    <option value="0">--PILIH Produk--</option>
-                                    <?php foreach ($produk as $row) : ?>
-                                        <option value="<?php echo $row->id_produk; ?>"><?php echo $row->nama_produk; ?></option>
+                                <label for="divisi">Divisi</label>
+                                <select name="divisi" id="divisi" class="form-control">
+                                    <option value="0">--PILIH Divisi--</option>
+                                    <?php foreach ($data->result() as $row) : ?>
+                                        <option value="<?php echo $row->id_divisi; ?>"><?php echo $row->nama_divisi; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <?= form_error('produk', '<small class="text-danger" pl-3>', '</small>'); ?>
+                            <div class="form-group">
+                                <label for="divisi">Produk</label>
+                                <select name="produk" class="produk form-control">
+                                    <option value="0">--PILIH Pilih Produk--</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="tlfunding">TL Funding</label>
                                 <input type="text" class="form-control" name="tlfunding" id="tlfunding">
@@ -75,23 +80,23 @@
                                 <?= form_error('nohp', '<small class="text-danger" pl-3>', '</small>'); ?>
                             </div>
                             <div class="form-group">
-                                <label for="prospek">Status prospek</label>
-                                <select class="form-control" id="prospek" name="prospek">
-                                    <option value="">--Pilih Perkembangan Prospek--</option>
-                                    <option value="P1">P1 - penawaran Produk</option>
-                                    <option value="P2">P2 - Follow up</option>
-                                    <option value="P3">P3 - Solusi prospek fix angka penempatan deoposito</option>
-                                    <option value="P4">P4 - Closing Penempatan deposito</option>
-                                </select>
-                                <?= form_error('prospek', '<small class="text-danger" pl-3>', '</small>'); ?>
-                            </div>
-                            <div class="form-group">
                                 <label for="estimasiclosing">Estimasi closing</label>
                                 <input type="text" class="form-control" name="estimasiclosing" id="estimasiclosing">
                             </div>
                             <div class="form-group">
                                 <label for="closing">Closing</label>
                                 <input type="text" class="form-control" name="closing" id="closing">
+                            </div>
+                            <div class="form-group">
+                                <label for="prospek">Status prospek</label>
+                                <select class="form-control" id="prospek" name="prospek">
+                                    <option value="">--Pilih Perkembangan Prospek--</option>
+                                    <option value="P1 - penawaran Produk">P1 - penawaran Produk</option>
+                                    <option value="P2 - Follow up">P2 - Follow up</option>
+                                    <option value="P3 - Solusi prospek fix angka penempatan deoposito">P3 - Solusi prospek fix angka penempatan deoposito</option>
+                                    <option value="P4 - Closing Penempatan deposito">P4 - Closing Penempatan deposito</option>
+                                </select>
+                                <?= form_error('prospek', '<small class="text-danger" pl-3>', '</small>'); ?>
                             </div>
                             <div class="form-group">
                                 <label for="image">Upload Foto Prospek</label>
@@ -135,21 +140,26 @@
             format: 'YYYY-MM-DD'
         });
 
-        $(document).ready(function() {
-            $("#estimasiclosing").hide();
-            $("#closing").hide();
-            $('select[name="prospek"]').change(function() {
-                if ($('select[name="prospek"] option:selected').val() == 'P4') {
-                    $('#closing').show();
-                    $("#estimasiclosing").val('0');
-                    $("#estimasiclosing").prop("disabled", true);
-                } else {
-                    $('#closing').hide();
-                    $("#estimasiclosing").removeProp("disabled", true);
-                    $("#estimasiclosing").show();
+        $('#divisi').change(function() {
+            var id = $(this).val();
+            $.ajax({
+                url: "<?php echo base_url(); ?>contoh/get_produk",
+                method: "POST",
+                data: {
+                    id: id
+                },
+                async: false,
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                       html += '<option value=' + data[i].id_produk + '>' + data[i].nama_produk + '</option>';
+                    }
+                    $('.produk').html(html);
+
                 }
             });
-
         });
 
     });

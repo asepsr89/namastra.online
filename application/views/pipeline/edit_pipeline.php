@@ -36,17 +36,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="Produk">produk</label>
-                                <select name="produk" id="produk" class="form-control">
-                                    <option value="0">--PILIH Produk--</option>
-                                    <?php foreach ($produk as $row) : ?>
-                                        <option value="<?php echo $row->id_produk; ?>"><?php echo $row->nama_produk; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <?= form_error('produk', '<small class="text-danger" pl-3>', '</small>'); ?>
                             <div class="form-group">
                                 <label for="tlfunding">TL Funding</label>
                                 <input type="text" class="form-control" value="<?php echo $pipeline['tl_funding']; ?>" name="tlfunding" id="tlfunding">
@@ -68,29 +57,29 @@
                                 <input type="text" class="form-control" name="nohp" value="<?php echo $pipeline['nohp']; ?>" id="nohp">
                             </div>
                             <div class="form-group">
-                                <label for="prospek">Status prospek</label>
-                                <select class="form-control" id="prospek" name="prospek">
-                                    <option <?php if ($pipeline['pipline'] == 0) {
-                                                echo 'selected';
-                                            } ?> value="P1">P1 - penawaran Produk</option>
-                                    <option <?php if ($pipeline['pipline']  == 1) {
-                                                echo 'selected';
-                                            } ?> value="P2">P2 - Follow up</option>
-                                    <option <?php if ($pipeline['pipline']  == 2) {
-                                                echo 'selected';
-                                            } ?> value="P3">P3 - Solusi prospek fix angka penempatan deoposito</option>
-                                    <option <?php if ($pipeline['pipline']  == 3) {
-                                                echo 'selected';
-                                            } ?> value="P4">P4 - Closing Penempatan deposito</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label for="estimasiclosing">Estimasi closing</label>
-                                <input type="text" class="form-control" readonly name="estimasiclosing" value="<?php echo $pipeline['estimasi_close'] ?>" id="estimasiclosing">
+                                <input type="text" class="form-control" name="estimasiclosing" value="<?php echo $pipeline['estimasi_close'] ?>" id="estimasiclosing">
                             </div>
                             <div class="form-group">
                                 <label for="closing">Closing</label>
                                 <input type="text" class="form-control" name="closing" value="<?php echo $pipeline['closing'] ?>" id="closing">
+                            </div>
+                            <div class="form-group">
+                                <label for="prospek">Status prospek</label>
+                                <select class="form-control" id="prospek" name="prospek">
+                                    <option <?php if ($pipeline['pipline'] == 0) {
+                                                echo 'selected';
+                                            } ?> value="P1 - penawaran Produk">P1 - penawaran Produk</option>
+                                    <option <?php if ($pipeline['pipline']  == 1) {
+                                                echo 'selected';
+                                            } ?> value="P2 - Follow up">P2 - Follow up</option>
+                                    <option <?php if ($pipeline['pipline']  == 2) {
+                                                echo 'selected';
+                                            } ?> value="P3 - Solusi prospek fix angka penempatan deoposito">P3 - Solusi prospek fix angka penempatan deoposito</option>
+                                    <option <?php if ($pipeline['pipline']  == 3) {
+                                                echo 'selected';
+                                            } ?> value="P4 - Closing Penempatan deposito">P4 - Closing Penempatan deposito</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="image">Upload Gambar</label>
@@ -133,22 +122,5 @@
             locale: 'id',
             format: 'YYYY-MM-DD'
         });
-
-        $(document).ready(function() {
-            $("#closing").hide();
-            $('select[name="prospek"]').change(function() {
-                if ($('select[name="prospek"] option:selected').val() == 'P4') {
-                    $('#closing').show();
-                    $("#estimasiclosing").val('0');
-                } else {
-                    $('#closing').hide();
-                    $("#estimasiclosing").show();
-                    $(this).removeAttr('readonly');
-
-                }
-            });
-
-        });
-
     });
 </script>

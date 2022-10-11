@@ -4,23 +4,14 @@ class Model_pipeline extends CI_Model
 {
     function getDataPipeline()
     {
-
-        $query = "SELECT `id_pipline`,`tgl_input`,`tgl_prospek`,`tl_funding`,`funding_officer`,`nama_prospek`,`alamat`,`nohp`,`pipline`,
-        `estimasi_close`,`closing`,`upload_img`,`id_status`,`NotePC`,produk.`id_produk`,produk.`nama_produk`,kode_cabang
-        FROM `pipeline`
-        INNER JOIN produk ON pipeline.`id_produk` =produk.`id_produk`
-        ORDER BY `pipeline`.`tgl_input` DESC";
-
-        return $this->db->query($query);
+        return $this->db->get('pipeline');
     }
 
     function getDataByCabang($index_data = null)
     {
 
-        $query = "SELECT `id_pipline`,`tgl_input`,`tgl_prospek`,`tl_funding`,`funding_officer`,`nama_prospek`,`alamat`,`nohp`,`pipline`,
-        `estimasi_close`,`closing`,`upload_img`,`id_status`,`NotePC`,produk.`id_produk`,produk.`nama_produk`
+        $query = "SELECT `id_pipline`,`tgl_input`,`tgl_prospek`,`tl_funding`,`funding_officer`,`nama_prospek`,`alamat`,`nohp`,`pipline`,`estimasi_close`,`closing`,`upload_img`,`id_status`,`NotePC`
         FROM `pipeline`
-        INNER JOIN produk ON pipeline.`id_produk` =produk.`id_produk`
         WHERE `kode_cabang` = '$index_data'
         ORDER BY `pipeline`.`tgl_input` DESC";
 
@@ -99,14 +90,5 @@ class Model_pipeline extends CI_Model
         $this->db->select("SUM(estimasi_close) AS tot_estimasi");
         $this->db->from('pipeline');
         return $this->db->get();
-    }
-
-    function get_produk()
-    {
-        $this->db->get('produk');
-    }
-    function get_divisi()
-    {
-        $this->db->get('divisi');
     }
 }

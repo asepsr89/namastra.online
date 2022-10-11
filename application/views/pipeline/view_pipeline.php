@@ -34,7 +34,6 @@
                                             <th>TL Funding</th>
                                             <th>Funding Officer</th>
                                             <th>Pipeline</th>
-                                            <th>Produk</th>
                                             <th>Estimasi Closing</th>
                                             <th>Closing</th>
                                             <th>Status</th>
@@ -53,7 +52,6 @@
                                                 <td><?php echo $p->tl_funding; ?></td>
                                                 <td><?php echo $p->funding_officer; ?></td>
                                                 <td><?php echo $p->pipline ?></td>
-                                                <td><?php echo $p->nama_produk ?></td>
                                                 <td><?php echo number_format($p->estimasi_close, '0', '', '.'); ?></td>
                                                 <td><?php echo number_format($p->closing, '0', '', '.'); ?></td>
                                                 <td><?php
@@ -169,14 +167,6 @@ foreach ($userdata as $p) : $no++ ?>
                                     </div>
                                     <div class="col-7">
                                         : <?php echo $p->pipline; ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        Produk
-                                    </div>
-                                    <div class="col-7">
-                                        : <?php echo $p->nama_produk; ?>
                                     </div>
                                 </div>
                                 <div class="row">

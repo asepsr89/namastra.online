@@ -28,7 +28,6 @@ class Admin extends CI_Controller
         $data['fasilitaspinjaman'] = $this->Model_pinjaman->getAdminPinjamanGrafik()->result();
         $data['totalclosing'] = $this->Model_pipeline->AdmintotalClosing()->row_array();
         $data['totalestimasi'] = $this->Model_pipeline->AdmintotalEstimasi()->row_array();
-        $data['produk'] = $this->Model_user->getProduk()->result();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/sidebar', $data);
