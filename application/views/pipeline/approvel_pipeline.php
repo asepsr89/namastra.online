@@ -5,7 +5,7 @@
                 <div class="col">
                     <div class="alert alert-primary" role="alert">
                         <i class="nav-icon fas fa-user"></i>
-                        Data Pipeline Marketing
+                        Data Pipeline Marketing Namastra
                     </div>
                 </div>
             </div>
